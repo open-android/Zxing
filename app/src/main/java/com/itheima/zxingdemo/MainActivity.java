@@ -46,13 +46,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn2:
                 String content = mEt.getText().toString().trim();
-//                try {
-//                    Bitmap bitmap = null;
-//                    mImage.setImageBitmap(bitmap);
-//                } catch (WriterException e) {
-//                    e.printStackTrace();
-//                }
-//                break;
+                Bitmap bitmap = null;
+                try {
+                    bitmap = BitmapUtils.create2DCode(content);
+                    mImage.setImageBitmap(bitmap);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 

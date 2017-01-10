@@ -22,7 +22,7 @@
 
 ### 2. 在Module的build.gradle添加依赖
 
-    compile 'com.github.open-android:Zxing:v1.0.0'
+    compile 'com.github.open-android:Zxing:v1.0.2'
 
 ### 3.清单文件添加权限
 
@@ -32,4 +32,26 @@
 	<uses-feature android:name="android.hardware.camera.autofocus" />
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<uses-permission android:name="android.permission.FLASHLIGHT" />
+
+### 4.调用扫描和生成二维码功能
+
+
+#### 4.1打开CaptureActivity扫描
+	
+    startActivity(new Intent(MainActivity.this, CaptureActivity.class));
+
+#### 4.2传入内容生成二维码
+
+	String content = mEt.getText().toString().trim();
+    Bitmap bitmap = null;
+    try {
+        bitmap = BitmapUtils.create2DCode(content);
+        mImage.setImageBitmap(bitmap);
+    } catch (WriterException e) {
+        e.printStackTrace();
+    }
+
+	
+
+
 	
