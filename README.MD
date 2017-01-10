@@ -7,3 +7,29 @@
 ![](screenshot1.gif)
 
 ![](screenshot2.gif)
+
+## 使用步骤
+
+### 1. 在project的build.gradle添加如下代码(如下图)
+
+	allprojects {
+	    repositories {
+	        maven { url "https://jitpack.io" }
+	    }
+	}
+
+![](tu_1.png)
+
+### 2. 在Module的build.gradle添加依赖
+
+    compile 'com.github.open-android:Zxing:v1.0.0'
+
+### 3.清单文件添加权限
+
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-feature android:name="android.hardware.camera" />
+	<uses-feature android:name="android.hardware.camera.autofocus" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.FLASHLIGHT" />
+	
