@@ -7,9 +7,9 @@
     <EditText
         android:id="@+id/et"
         android:layout_width="match_parent"
-        android:text="http://baidu.com"
         android:layout_height="wrap_content"
-        android:hint="输入内容，生成二维码" />
+        android:hint="输入内容，生成二维码"
+        android:text="http://baidu.com" />
 
     <Button
         android:id="@+id/btn2"
@@ -25,9 +25,27 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:text="扫描返回bitmap"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="#FF0000"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/image_callback"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
 
 
 </LinearLayout>

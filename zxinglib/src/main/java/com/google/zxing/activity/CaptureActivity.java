@@ -62,6 +62,8 @@ public final class CaptureActivity extends Activity implements
 
     private static final int PARSE_BARCODE_FAIL = 300;
     private static final int PARSE_BARCODE_SUC = 200;
+    public static final String SCAN_QRCODE_RESULT = "qrcode_result";//扫码返回结果（字符串）
+    public static final String SCAN_QRCODE_BITMAP = "qrcode_bitmap";//扫码结果bitmap
 
     /**
      * 是否有预览
@@ -138,13 +140,15 @@ public final class CaptureActivity extends Activity implements
             activityReference = new WeakReference<Activity>(activity);
         }
 
+
+
         @Override
         public void handleMessage(Message msg) {
 
             switch (msg.what) {
                 case PARSE_BARCODE_SUC: // 解析图片成功
-                    Toast.makeText(activityReference.get(),
-                            "解析成功，结果为：" + msg.obj, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activityReference.get(),
+//                            "解析成功，结果为：" + msg.obj, Toast.LENGTH_SHORT).show();
                     break;
 
                 case PARSE_BARCODE_FAIL:// 解析图片失败
@@ -332,8 +336,10 @@ public final class CaptureActivity extends Activity implements
                                 if (result != null) {
                                     Message m = mHandler.obtainMessage();
                                     m.what = PARSE_BARCODE_SUC;
-                                    m.obj = ResultParser.parseResult(result)
+                                    String resultStr = ResultParser.parseResult(result)
                                             .toString();
+                                    m.obj = resultStr;
+                                    setCaptureResult(resultStr);
                                     mHandler.sendMessage(m);
                                 } else {
                                     Message m = mHandler.obtainMessage();
@@ -394,14 +400,19 @@ public final class CaptureActivity extends Activity implements
         lastResult = rawResult;
 
         // 把图片画到扫描框
-        viewfinderView.drawResultBitmap(barcode);
+//        viewfinderView.drawResultBitmap(barcode);
 
         beepManager.playBeepSoundAndVibrate();
 
-        Toast.makeText(this,
-                "识别结果:" + ResultParser.parseResult(rawResult).toString(),
-                Toast.LENGTH_SHORT).show();
-
+//        Toast.makeText(this,
+//                "识别结果:" + ResultParser.parseResult(rawResult).toString(),
+//                Toast.LENGTH_SHORT).show();
+        String result = ResultParser.parseResult(rawResult).toString();
+        Intent data = new Intent();
+        data.putExtra(SCAN_QRCODE_RESULT, result);
+        data.putExtra(SCAN_QRCODE_BITMAP, barcode);
+        setResult(0, data);
+        finish();
     }
 
     public void restartPreviewAfterDelay(long delayMS) {
@@ -514,6 +525,13 @@ public final class CaptureActivity extends Activity implements
         }
 
 
+    }
+
+    private void setCaptureResult(String result){
+        Intent data = new Intent();
+        data.putExtra(SCAN_QRCODE_RESULT, result);
+        setResult(0, data);
+        finish();
     }
 
 }

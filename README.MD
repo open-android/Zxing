@@ -8,6 +8,8 @@
 
 ![](screenshot2.gif)
 
+![](screenshot3.gif)
+
 ## 使用步骤
 
 ### 1. 在project的build.gradle添加如下代码(如下图)
