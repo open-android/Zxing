@@ -24,7 +24,7 @@
 
 ### 2. 在Module的build.gradle添加依赖
 
-    compile 'com.github.open-android:Zxing:v1.0.2'
+    compile 'com.github.open-android:Zxing:v1.0.3'
 
 ### 3.清单文件添加权限
 
